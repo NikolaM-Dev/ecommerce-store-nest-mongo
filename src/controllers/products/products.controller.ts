@@ -1,4 +1,21 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  HttpStatus,
+  HttpCode,
+} from '@nestjs/common';
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
 
 @Controller('products')
 export class ProductsController {
@@ -7,17 +24,38 @@ export class ProductsController {
     @Query('limit') limit = 100,
     @Query('offset') offset = 0,
     @Query('brand') brand: string,
-  ): string {
-    return `producsts: limit => ${limit} offset => ${offset} brand => ${brand}`;
-  }
-
-  @Get('filter')
-  getProductFilter(): string {
-    return "i'm a filter";
+  ): { message: string } {
+    return {
+      message: `producsts: limit => ${limit} offset => ${offset} brand => ${brand}`,
+    };
   }
 
   @Get(':id')
-  getProduct(@Param('id') id: string): string {
-    return `The product has an id: ${id}`;
+  @HttpCode(HttpStatus.ACCEPTED)
+  getOne(@Param('id') id: string): { message: string } {
+    return { message: `The product has an id: ${id}` };
+  }
+
+  @Post()
+  create(@Body() payload: Product) {
+    return {
+      message: 'action for create',
+      payload,
+    };
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() payload: Product) {
+    return {
+      message: `update product ${id}`,
+      payload,
+    };
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return {
+      message: `delete product ${id}`,
+    };
   }
 }
