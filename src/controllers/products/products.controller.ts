@@ -8,16 +8,11 @@ import {
   Put,
   HttpStatus,
   HttpCode,
-  ParseIntPipe,
+  // ParseIntPipe,
 } from '@nestjs/common';
 
 import { ProductsService } from '../../services/products/products.service';
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-}
+import { ParseIntPipe } from '../../common/parse-int.pipe';
 
 @Controller('products')
 export class ProductsController {
@@ -35,7 +30,7 @@ export class ProductsController {
   }
 
   @Post()
-  create(@Body() payload: Product) {
+  create(@Body() payload: any) {
     return this.productsService.create(payload);
   }
 
