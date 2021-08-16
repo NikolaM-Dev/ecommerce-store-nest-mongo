@@ -6,10 +6,11 @@ import {
   Param,
   Post,
   Put,
-  Query,
   HttpStatus,
   HttpCode,
 } from '@nestjs/common';
+
+import { ProductsService } from '../../services/products/products.service';
 
 interface Product {
   id: number;
@@ -19,43 +20,31 @@ interface Product {
 
 @Controller('products')
 export class ProductsController {
+  constructor(private productsService: ProductsService) {}
+
   @Get()
-  getProducts(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-    @Query('brand') brand: string,
-  ): { message: string } {
-    return {
-      message: `producsts: limit => ${limit} offset => ${offset} brand => ${brand}`,
-    };
+  getProducts() {
+    return this.productsService.findAll();
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('id') id: string): { message: string } {
-    return { message: `The product has an id: ${id}` };
+  getOne(@Param('id') id: string) {
+    return this.productsService.findById(+id);
   }
 
   @Post()
   create(@Body() payload: Product) {
-    return {
-      message: 'action for create',
-      payload,
-    };
+    return this.productsService.create(payload);
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() payload: Product) {
-    return {
-      message: `update product ${id}`,
-      payload,
-    };
+  update(@Param('id') id: string, @Body() payload: Product) {
+    return this.productsService.update(+id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
-    return {
-      message: `delete product ${id}`,
-    };
+  delete(@Param('id') id: string) {
+    return this.productsService.delete(+id);
   }
 }
