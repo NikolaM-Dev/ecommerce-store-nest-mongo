@@ -10,7 +10,7 @@ import {
 
 import { CategoriesService } from 'src/services/categories/categories.service';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
-import { CreateCategoryDto, UpdateCategoryDto } from 'src/dtos/category.dto';
+import { CreateCategoryDto, UpdateCategoryDto } from 'src/dtos/categories.dto';
 
 @Controller('categories')
 export class CategoriesController {
