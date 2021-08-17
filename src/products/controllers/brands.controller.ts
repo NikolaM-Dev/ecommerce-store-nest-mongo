@@ -10,8 +10,8 @@ import {
   Put,
 } from '@nestjs/common';
 
-import { BrandsService } from 'src/services/brands.service';
-import { CreateBrandDto, UpdateBrandDto } from 'src/dtos/brands.dto';
+import { BrandsService } from '../services/brands.service';
+import { CreateBrandDto, UpdateBrandDto } from '../dtos/brands.dto';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
 
 @Controller('brands')

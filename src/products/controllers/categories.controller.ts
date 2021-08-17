@@ -10,8 +10,8 @@ import {
   HttpCode,
 } from '@nestjs/common';
 
-import { CategoriesService } from 'src/services/categories.service';
-import { CreateCategoryDto, UpdateCategoryDto } from 'src/dtos/categories.dto';
+import { CategoriesService } from '../services/categories.service';
+import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
 
 @Controller('categories')
