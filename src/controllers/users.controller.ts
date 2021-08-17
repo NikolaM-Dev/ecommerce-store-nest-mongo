@@ -7,12 +7,12 @@ import {
   Put,
   Post,
   Body,
+  Delete,
 } from '@nestjs/common';
 
-import { ParseIntPipe } from 'src/common/parse-int.pipe';
 import { CreateUserDto, UpdateUserDto } from 'src/dtos/users.dto';
-import { UsersService } from 'src/services/users/users.service';
-import { Delete } from '@nestjs/common';
+import { ParseIntPipe } from 'src/common/parse-int.pipe';
+import { UsersService } from 'src/services/users.service';
 
 @Controller('users')
 export class UsersController {

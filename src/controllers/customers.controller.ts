@@ -1,9 +1,17 @@
-import { Controller, Get, Param, Post, Body, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Put,
+  HttpStatus,
+  HttpCode,
+} from '@nestjs/common';
 
-import { CustomersService } from 'src/services/customers/customers.service';
-import { CreateCustomerDto } from 'src/dtos/customers.dto';
+import { CreateCustomerDto, UpdateCustomerDto } from 'src/dtos/customers.dto';
+import { CustomersService } from 'src/services/customers.service';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
-import { UpdateCustomerDto } from 'src/dtos/customers.dto';
 
 @Controller('customers')
 export class CustomersController {
@@ -15,6 +23,7 @@ export class CustomersController {
   }
 
   @Get('id')
+  @HttpCode(HttpStatus.ACCEPTED)
   getOne(@Param('id', ParseIntPipe) id: number) {
     return this.customersService.findById(id);
   }

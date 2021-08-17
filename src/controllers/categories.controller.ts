@@ -6,11 +6,13 @@ import {
   Param,
   Post,
   Put,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 
-import { CategoriesService } from 'src/services/categories/categories.service';
-import { ParseIntPipe } from 'src/common/parse-int.pipe';
+import { CategoriesService } from 'src/services/categories.service';
 import { CreateCategoryDto, UpdateCategoryDto } from 'src/dtos/categories.dto';
+import { ParseIntPipe } from 'src/common/parse-int.pipe';
 
 @Controller('categories')
 export class CategoriesController {
@@ -21,6 +23,7 @@ export class CategoriesController {
   }
 
   @Get('id')
+  @HttpCode(HttpStatus.ACCEPTED)
   GetOne(@Param('id', ParseIntPipe) id: number) {
     return this.categoriesService.findById(id);
   }
