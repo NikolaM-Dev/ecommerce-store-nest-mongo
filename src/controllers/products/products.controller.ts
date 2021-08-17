@@ -12,15 +12,15 @@ import {
 } from '@nestjs/common';
 
 import { CreateProductDto, UpdateProductDto } from 'src/dtos/products.dto';
-import { ParseIntPipe } from '../../common/parse-int.pipe';
-import { ProductsService } from '../../services/products/products.service';
+import { ParseIntPipe } from 'src/common/parse-int.pipe';
+import { ProductsService } from 'src/services/products/products.service';
 
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @Get()
-  getProducts() {
+  getAll() {
     return this.productsService.findAll();
   }
 
