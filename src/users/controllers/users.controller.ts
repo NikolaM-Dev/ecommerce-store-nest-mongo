@@ -25,8 +25,14 @@ export class UsersController {
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findById(id);
+  }
+
+  @Get(':id/orders')
+  @HttpCode(HttpStatus.ACCEPTED)
+  findOrder(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.findOrderByUser(id);
   }
 
   @Post()
