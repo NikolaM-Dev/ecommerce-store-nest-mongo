@@ -8,8 +8,6 @@ export class AppService {
   ) {}
 
   getHello(): string {
-    console.log(this.tasks);
-
     return `apiKey: ${this.apiKey}`;
   }
 }
