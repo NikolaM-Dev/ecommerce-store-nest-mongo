@@ -9,15 +9,19 @@ import {
   HttpStatus,
   HttpCode,
 } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { CategoriesService } from '../services/categories.service';
 import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
 
+@ApiTags('categories')
 @Controller('categories')
 export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
+
   @Get()
+  @ApiOperation({ summary: 'List of categories' })
   getAll() {
     return this.categoriesService.findAll();
   }
