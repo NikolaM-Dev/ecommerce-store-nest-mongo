@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, IsUrl } from 'class-validator';
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/swagger';
 
 export class CreateBrandDto {
   @IsString()
