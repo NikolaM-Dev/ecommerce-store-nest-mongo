@@ -17,4 +17,9 @@ export class AppService {
     const port = this.configService.database.port;
     return `apiKey: ${apikey}, dbName: ${dbName} en el port: ${port}`;
   }
+
+  async findAllTasks() {
+    const tasksCollection = this.database.collection('tasks');
+    return await tasksCollection.find().toArray();
+  }
 }
