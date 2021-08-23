@@ -11,8 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
-import { ParseIntPipe } from 'src/common/parse-int.pipe';
+// import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
 import { ProductsService } from '../services/products.service';
 
 @ApiTags('products')
@@ -27,25 +26,22 @@ export class ProductsController {
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('id', ParseIntPipe) id: number) {
+  getOne(@Param('id') id: string) {
     return this.productsService.findById(id);
   }
 
-  @Post()
-  create(@Body() payload: CreateProductDto) {
-    return this.productsService.create(payload);
-  }
+  // @Post()
+  // create(@Body() payload: CreateProductDto) {
+  //   return this.productsService.create(payload);
+  // }
 
-  @Put(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() payload: UpdateProductDto,
-  ) {
-    return this.productsService.update(id, payload);
-  }
+  // @Put(':id')
+  // update(@Param('id') id: string, @Body() payload: UpdateProductDto) {
+  //   return this.productsService.update(id, payload);
+  // }
 
-  @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.delete(id);
-  }
+  // @Delete(':id')
+  // delete(@Param('id') id: string) {
+  //   return this.productsService.delete(id);
+  // }
 }
