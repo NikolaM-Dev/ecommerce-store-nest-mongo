@@ -1,7 +1,9 @@
 # @name findMany
-GET {{HOST}}/products
-?limit=3
-&offset=0
+GET {{HOST}}/products?
+# &limit=2
+# &offset=0
+&minPrice=100
+&maxPrice=1000
 
 ###
 
