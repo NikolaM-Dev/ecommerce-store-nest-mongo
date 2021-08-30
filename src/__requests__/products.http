@@ -1,5 +1,7 @@
 # @name findMany
 GET {{HOST}}/products
+?limit=3
+&offset=0
 
 ###
 
@@ -23,11 +25,11 @@ Content-Type: application/json
 ###
 
 # @name update
-PUT {{HOST}}/products/61241d736cb8859a49288a3d
+PUT {{HOST}}/products/61241d956cb8859a49288a3f
 Content-Type: application/json
 
 {
-  "price": 2200
+  "description": "Cereal de arroz cubierto con sabor a chocolate con vitaminas y minerales"
 }
 
 ###

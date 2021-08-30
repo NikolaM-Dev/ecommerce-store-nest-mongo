@@ -52,11 +52,12 @@ export class UsersService {
 
   async findOrderByUser(id: string): Promise<Order> {
     const user = await this.findById(id);
+    const { products } = await this.productsService.findMany();
 
     return {
       date: new Date(),
       user,
-      products: await this.productsService.findMany(),
+      products,
     };
   }
 }
