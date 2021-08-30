@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-// import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
+import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
 import { Product } from '../entities/product.entity';
 
 @Injectable()
@@ -11,13 +11,11 @@ export class ProductsService {
     @InjectModel(Product.name) private readonly productModel: Model<Product>,
   ) {}
 
-  findMany() {
-    return this.productModel.find().exec();
+  async findMany() {
+    return await this.productModel.find().exec();
   }
 
   async findById(id: string) {
-    console.log(id);
-
     const product = await this.productModel.findById(id).exec();
 
     if (!product)
@@ -28,26 +26,27 @@ export class ProductsService {
     return product;
   }
 
-  // create(payload: CreateProductDto) {
-  //   const id = ++this.counterId;
-  //   const newProduct = { id, ...payload };
-  //   this.products.push(newProduct);
+  create(payload: CreateProductDto) {
+    const newProduct = new this.productModel(payload);
+    return newProduct.save();
+  }
 
-  //   return newProduct;
-  // }
+  async update(id: string, payload: UpdateProductDto) {
+    const product = await this.productModel
+      .findByIdAndUpdate(id, { $set: payload }, { new: true })
+      .exec();
 
-  // update(id: number, payload: UpdateProductDto) {
-  //   const product = this.findById(id);
-  //   const index = this.products.findIndex((product) => product.id === id);
-  //   this.products[index] = { ...product, ...payload };
+    if (!product)
+      throw new NotFoundException(
+        `Product with id ${id} not found in database`,
+      );
 
-  //   return this.products[index];
-  // }
+    return product;
+  }
 
-  // delete(id: number) {
-  //   const product = this.findById(id);
-  //   this.products = this.products.filter((product) => product.id !== id);
+  async remove(id: string) {
+    await this.findById(id);
 
-  //   return product;
-  // }
+    return this.productModel.findByIdAndDelete(id);
+  }
 }

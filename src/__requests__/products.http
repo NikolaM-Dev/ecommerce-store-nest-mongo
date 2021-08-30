@@ -1,7 +1,36 @@
-# @name getAllProducts
+# @name findMany
 GET {{HOST}}/products
 
 ###
 
-# @name getProductById
-GET {{HOST}}/products/61241d736cb8859a49288a3d
+# @name findByID
+GET {{HOST}}/products/123123
+
+###
+
+# @name create
+POST {{HOST}}/products
+Content-Type: application/json
+
+{
+  "name": "Yogurt",
+  "price": 1500,
+  "stock": 43,
+  "description": "yogo yogo brand yogurt",
+  "image": "http://yogoyogo.png"
+}
+
+###
+
+# @name update
+PUT {{HOST}}/products/61241d736cb8859a49288a3d
+Content-Type: application/json
+
+{
+  "price": 2200
+}
+
+###
+
+# @name remove
+DELETE {{HOST}}/products/612d37f553e30ece02efa1af
