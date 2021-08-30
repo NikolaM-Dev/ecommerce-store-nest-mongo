@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { Db } from 'mongodb';
+
 import config from './config';
 
 @Injectable()
@@ -18,7 +19,7 @@ export class AppService {
     return `apiKey: ${apikey}, dbName: ${dbName} en el port: ${port}`;
   }
 
-  async findAllTasks() {
+  async findManyTasks() {
     const tasksCollection = this.database.collection('tasks');
     return await tasksCollection.find().toArray();
   }

@@ -12,7 +12,7 @@ export class AppController {
   }
 
   @Get('tasks')
-  async findAllTasks() {
-    return await this.appService.findAllTasks();
+  async findManyTasks() {
+    return await this.appService.findManyTasks();
   }
 }

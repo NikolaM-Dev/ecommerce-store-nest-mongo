@@ -1,7 +1,8 @@
-import { ConfigService } from '@nestjs/config';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
-import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
+// import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
 import { Order } from '../entities/order.entity';
 import { ProductsService } from 'src/products/services/products.service';
 import { User } from '../entities/user.entity';
@@ -9,30 +10,16 @@ import { User } from '../entities/user.entity';
 @Injectable()
 export class UsersService {
   constructor(
+    @InjectModel(User.name) private readonly userModel: Model<User>,
     private productsService: ProductsService,
-    private configService: ConfigService,
   ) {}
 
-  private counterId = 0;
-  private users: Array<User> = [
-    {
-      id: 1,
-      email: 'nikola@gmail.com',
-      password: '123456',
-      role: 'ADMIN',
-    },
-  ];
-
-  findAll() {
-    const apiKey = this.configService.get('API_KEY');
-    const dbName = this.configService.get('DATABASE_NAME');
-    console.log(apiKey, dbName);
-
-    return this.users;
+  findMany() {
+    return this.userModel.find().exec();
   }
 
-  findById(id: number) {
-    const user = this.users.find((user) => user.id === id);
+  async findById(id: string) {
+    const user = await this.userModel.findById(id).exec();
 
     if (!user)
       throw new NotFoundException(`User with id ${id} not found in database`);
@@ -40,36 +27,36 @@ export class UsersService {
     return user;
   }
 
-  create(payload: CreateUserDto) {
-    const id = ++this.counterId;
-    const newUser = { id, ...payload };
-    this.users.push(newUser);
+  // create(payload: CreateUserDto) {
+  //   const id = ++this.counterId;
+  //   const newUser = { id, ...payload };
+  //   this.users.push(newUser);
 
-    return newUser;
-  }
+  //   return newUser;
+  // }
 
-  update(id: number, payload: UpdateUserDto) {
-    const user = this.findById(id);
-    const index = this.users.findIndex((user) => user.id === id);
-    this.users[index] = { ...user, ...payload };
+  // update(id: number, payload: UpdateUserDto) {
+  //   const user = this.findById(id);
+  //   const index = this.users.findIndex((user) => user.id === id);
+  //   this.users[index] = { ...user, ...payload };
 
-    return this.users[index];
-  }
+  //   return this.users[index];
+  // }
 
-  delete(id: number) {
-    const user = this.findById(id);
-    this.users = this.users.filter((user) => user.id !== id);
+  // delete(id: number) {
+  //   const user = this.findById(id);
+  //   this.users = this.users.filter((user) => user.id !== id);
 
-    return user;
-  }
+  //   return user;
+  // }
 
-  async findOrderByUser(id: number): Promise<Order> {
-    const user = this.findById(id);
+  async findOrderByUser(id: string): Promise<Order> {
+    const user = await this.findById(id);
 
     return {
       date: new Date(),
       user,
-      products: await this.productsService.findAll(),
+      products: await this.productsService.findMany(),
     };
   }
 }

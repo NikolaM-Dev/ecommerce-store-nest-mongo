@@ -10,11 +10,14 @@ export class ProductsService {
   constructor(
     @InjectModel(Product.name) private readonly productModel: Model<Product>,
   ) {}
-  findAll() {
+
+  findMany() {
     return this.productModel.find().exec();
   }
 
   async findById(id: string) {
+    console.log(id);
+
     const product = await this.productModel.findById(id).exec();
 
     if (!product)

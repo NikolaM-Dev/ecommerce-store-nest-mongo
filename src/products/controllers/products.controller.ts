@@ -1,14 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  HttpStatus,
-  HttpCode,
-} from '@nestjs/common';
+import { Controller, Get, Param, HttpStatus, HttpCode } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 // import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
@@ -20,14 +10,14 @@ export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @Get()
-  getAll() {
-    return this.productsService.findAll();
+  findMany() {
+    return this.productsService.findMany();
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('id') id: string) {
-    return this.productsService.findById(id);
+  async findById(@Param('id') id: string) {
+    return await this.productsService.findById(id);
   }
 
   // @Post()
