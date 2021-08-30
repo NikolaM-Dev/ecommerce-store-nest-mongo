@@ -21,6 +21,10 @@ const API_KEY_PROD = 'production1234';
           user,
           pass: password,
           dbName,
+          useNewUrlParser: true,
+          useCreateIndex: true,
+          useUnifiedTopology: true,
+          useFindAndModify: false,
         };
       },
       inject: [config.KEY],
