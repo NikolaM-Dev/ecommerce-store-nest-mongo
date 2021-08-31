@@ -47,6 +47,7 @@ export class ProductsService {
 
   create(payload: CreateProductDto) {
     const newProduct = new this.productModel(payload);
+
     return newProduct.save();
   }
 
