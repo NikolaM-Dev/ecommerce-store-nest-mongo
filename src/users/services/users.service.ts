@@ -2,8 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-// import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
-import { Order } from '../entities/order.entity';
+import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
 import { ProductsService } from 'src/products/services/products.service';
 import { User } from '../entities/user.entity';
 
@@ -21,36 +20,34 @@ export class UsersService {
   async findById(id: string) {
     const user = await this.userModel.findById(id).exec();
 
-    if (!user)
-      throw new NotFoundException(`User with id ${id} not found in database`);
+    if (!user) throw new NotFoundException(`User with id ${id} not found`);
 
     return user;
   }
 
-  // create(payload: CreateUserDto) {
-  //   const id = ++this.counterId;
-  //   const newUser = { id, ...payload };
-  //   this.users.push(newUser);
+  create(payload: CreateUserDto) {
+    const newUser = new this.userModel(payload);
 
-  //   return newUser;
-  // }
+    return newUser.save();
+  }
 
-  // update(id: number, payload: UpdateUserDto) {
-  //   const user = this.findById(id);
-  //   const index = this.users.findIndex((user) => user.id === id);
-  //   this.users[index] = { ...user, ...payload };
+  async update(id: string, payload: UpdateUserDto) {
+    const user = await this.userModel
+      .findByIdAndUpdate(id, { $set: payload }, { new: true })
+      .exec();
 
-  //   return this.users[index];
-  // }
+    if (!user) throw new NotFoundException(`User with id ${id} not found`);
 
-  // delete(id: number) {
-  //   const user = this.findById(id);
-  //   this.users = this.users.filter((user) => user.id !== id);
+    return user;
+  }
 
-  //   return user;
-  // }
+  async remove(id: string) {
+    this.findById(id);
 
-  async findOrderByUser(id: string): Promise<Order> {
+    return await this.userModel.findByIdAndDelete(id);
+  }
+
+  async findOrderByUserId(id: string) {
     const user = await this.findById(id);
     const { products } = await this.productsService.findMany();
 
