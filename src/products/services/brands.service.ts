@@ -18,8 +18,7 @@ export class BrandsService {
   async findById(id: string) {
     const brand = await this.brandModel.findById(id).exec();
 
-    if (!brand)
-      throw new NotFoundException(`Brand with id ${id} not found in database`);
+    if (!brand) throw new NotFoundException(`Brand with id ${id} not found`);
 
     return brand;
   }
@@ -35,8 +34,7 @@ export class BrandsService {
       .findByIdAndUpdate(id, { $set: payload }, { new: true })
       .exec();
 
-    if (!brand)
-      throw new NotFoundException(`Brand with id ${id} not found in database`);
+    if (!brand) throw new NotFoundException(`Brand with id ${id} not found`);
 
     return brand;
   }

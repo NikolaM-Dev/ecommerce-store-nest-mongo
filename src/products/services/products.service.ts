@@ -38,9 +38,7 @@ export class ProductsService {
     const product = await this.productModel.findById(id).exec();
 
     if (!product)
-      throw new NotFoundException(
-        `Product with id ${id} not found in database`,
-      );
+      throw new NotFoundException(`Product with id ${id} not found`);
 
     return product;
   }
@@ -57,9 +55,7 @@ export class ProductsService {
       .exec();
 
     if (!product)
-      throw new NotFoundException(
-        `Product with id ${id} not found in database`,
-      );
+      throw new NotFoundException(`Product with id ${id} not found`);
 
     return product;
   }

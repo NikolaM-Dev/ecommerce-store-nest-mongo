@@ -36,9 +36,7 @@ export class CustomersService {
       .exec();
 
     if (!customer)
-      throw new NotFoundException(
-        `Customer with id ${id} not found in database`,
-      );
+      throw new NotFoundException(`Customer with id ${id} not found`);
 
     return customer;
   }
