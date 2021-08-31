@@ -12,8 +12,7 @@ import {
 
 import { OrdersService } from '../services/orders.service';
 import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
-import { CreateOrderDto } from '../dtos/orders.dto';
-import { UpdateBrandDto } from '../../products/dtos/brands.dto';
+import { CreateOrderDto, UpdateOrderDto } from '../dtos/orders.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -38,7 +37,7 @@ export class OrdersController {
   @Put('id')
   async update(
     @Param('id', IsMongoIdPipe) id: string,
-    payload: UpdateBrandDto,
+    payload: UpdateOrderDto,
   ) {
     return await this.odersService.update(id, payload);
   }
