@@ -26,6 +26,7 @@ export class ProductsService {
       this.productModel.countDocuments(),
       this.productModel
         .find(filters)
+        .populate('brand')
         .skip(offset * limit)
         .limit(limit)
         .exec(),
@@ -35,7 +36,10 @@ export class ProductsService {
   }
 
   async findById(id: string) {
-    const product = await this.productModel.findById(id).exec();
+    const product = await this.productModel
+      .findById(id)
+      .populate('brand')
+      .exec();
 
     if (!product)
       throw new NotFoundException(`Product with id ${id} not found`);
@@ -44,7 +48,7 @@ export class ProductsService {
   }
 
   create(payload: CreateProductDto) {
-    const newProduct = new this.productModel(payload);
+    const newProduct = new this.productModel(payload).populate('brand');
 
     return newProduct.save();
   }
@@ -52,6 +56,7 @@ export class ProductsService {
   async update(id: string, payload: UpdateProductDto) {
     const product = await this.productModel
       .findByIdAndUpdate(id, { $set: payload }, { new: true })
+      .populate('brand')
       .exec();
 
     if (!product)
@@ -63,6 +68,6 @@ export class ProductsService {
   async remove(id: string) {
     await this.findById(id);
 
-    return this.productModel.findByIdAndDelete(id);
+    return this.productModel.findByIdAndDelete(id).populate('brand');
   }
 }
