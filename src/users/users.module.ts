@@ -8,6 +8,9 @@ import { UsersController } from './controllers/users.controller';
 import { UsersService } from './services/users.service';
 import { Customer, CustomerSchema } from './entities/customer.entity';
 import { User, UserSchema } from './entities/user.entity';
+import { OrdersController } from './controllers/orders.controller';
+import { OrdersService } from './services/orders.service';
+import { Order, OrderSchema } from './entities/order.entity';
 
 @Module({
   imports: [
@@ -20,10 +23,14 @@ import { User, UserSchema } from './entities/user.entity';
         name: User.name,
         schema: UserSchema,
       },
+      {
+        name: Order.name,
+        schema: OrderSchema,
+      },
     ]),
     ProductsModule,
   ],
-  controllers: [CustomersController, UsersController],
-  providers: [CustomersService, UsersService],
+  controllers: [CustomersController, UsersController, OrdersController],
+  providers: [CustomersService, UsersService, OrdersService],
 })
 export class UsersModule {}
