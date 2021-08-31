@@ -1,14 +1,15 @@
 # @name findMany
-GET {{HOST}}/products?
+GET {{HOST}}/products
+?
 # &limit=2
 # &offset=0
-&minPrice=100
-&maxPrice=1000
+# &minPrice=100
+# &maxPrice=1000
 
 ###
 
 # @name findByID
-GET {{HOST}}/products/123123
+GET {{HOST}}/products/612eba90290ed5cbb385f18e
 
 ###
 
@@ -25,7 +26,8 @@ Content-Type: application/json
   "category": {
     "name": "Comida",
     "image": "https://comida-category.com"
-  }
+  },
+  "brand": "612d02f5035f71c228fe6663"
 }
 
 ###
