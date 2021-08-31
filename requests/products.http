@@ -21,7 +21,11 @@ Content-Type: application/json
   "price": 1500,
   "stock": 43,
   "description": "yogo yogo brand yogurt",
-  "image": "http://yogoyogo.png"
+  "image": "http://yogoyogo.png",
+  "category": {
+    "name": "Comida",
+    "image": "https://comida-category.com"
+  }
 }
 
 ###
