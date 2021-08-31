@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-// import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customers.dto';
+import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customers.dto';
 import { Customer } from '../entities/customer.entity';
 
 @Injectable()
@@ -24,26 +24,28 @@ export class CustomersService {
     return customer;
   }
 
-  // create(payload: CreateCustomerDto) {
-  //   const id = ++this.counterId;
-  //   const newCustomer = { id, ...payload };
-  //   this.customers.push(newCustomer);
+  create(payload: CreateCustomerDto) {
+    const newCustomer = new this.customerModel(payload);
 
-  //   return newCustomer;
-  // }
+    return newCustomer.save();
+  }
 
-  // update(id: number, payload: UpdateCustomerDto) {
-  //   const customer = this.findById(id);
-  //   const index = this.customers.findIndex((customer) => customer.id === id);
-  //   this.customers[index] = { ...customer, ...payload };
+  async update(id: string, payload: UpdateCustomerDto) {
+    const customer = await this.customerModel
+      .findByIdAndUpdate(id, { $set: payload }, { new: true })
+      .exec();
 
-  //   return this.customers[index];
-  // }
+    if (!customer)
+      throw new NotFoundException(
+        `Customer with id ${id} not found in database`,
+      );
 
-  // delete(id: number) {
-  //   const customer = this.findById(id);
-  //   this.customers = this.customers.filter((customer) => customer.id !== id);
+    return customer;
+  }
 
-  //   return customer;
-  // }
+  async remove(id: string) {
+    this.findById(id);
+
+    return await this.customerModel.findByIdAndDelete(id);
+  }
 }
