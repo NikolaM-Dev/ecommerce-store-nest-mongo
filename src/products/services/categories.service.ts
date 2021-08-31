@@ -3,8 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Category } from '../entities/category.entity';
-// import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
-// import { CategoriesController }  from '../controllers/brands.controller.ts'
+import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
 
 @Injectable()
 export class CategoriesService {
@@ -25,26 +24,26 @@ export class CategoriesService {
     return category;
   }
 
-  // create(payload: CreateCategoryDto) {
-  //   const id = ++this.counterId;
-  //   const newCategory = { id, ...payload };
-  //   this.categories.push(newCategory);
+  create(payload: CreateCategoryDto) {
+    const newCategory = new this.categoryModel(payload);
 
-  //   return newCategory;
-  // }
+    return newCategory.save();
+  }
 
-  // update(id: number, payload: UpdateCategoryDto) {
-  //   const category = this.findById(id);
-  //   const index = this.categories.findIndex((category) => category.id === id);
-  //   this.categories[index] = { ...category, ...payload };
+  async update(id: string, payload: UpdateCategoryDto) {
+    const category = await this.categoryModel
+      .findByIdAndUpdate(id, { $set: payload }, { new: true })
+      .exec();
 
-  //   return this.categories[index];
-  // }
+    if (!category)
+      throw new NotFoundException(`Category with id ${id} not found`);
 
-  // delete(id: number) {
-  //   const category = this.findById(id);
-  //   this.categories = this.categories.filter((category) => category.id !== id);
+    return category;
+  }
 
-  //   return category;
-  // }
+  remove(id: string) {
+    this.findById(id);
+
+    return this.categoryModel.findByIdAndDelete(id);
+  }
 }
