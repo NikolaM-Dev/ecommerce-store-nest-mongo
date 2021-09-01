@@ -58,4 +58,18 @@ export class OrdersService {
       .populate('products')
       .exec();
   }
+
+  async removeProduct(id: string, productId: string) {
+    const order = await this.orderModel.findById(id).exec();
+    order.products.pull(productId);
+
+    return order.save();
+  }
+
+  async addProduct(id: string, productsIds: string[]) {
+    const order = await this.orderModel.findById(id).exec();
+    productsIds.forEach((productId) => order.products.push(productId));
+
+    return order.save();
+  }
 }

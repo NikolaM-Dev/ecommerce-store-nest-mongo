@@ -12,7 +12,11 @@ import {
 
 import { OrdersService } from '../services/orders.service';
 import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
-import { CreateOrderDto, UpdateOrderDto } from '../dtos/orders.dto';
+import {
+  CreateOrderDto,
+  UpdateOrderDto,
+  AddProductstoOderDto,
+} from '../dtos/orders.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -23,7 +27,7 @@ export class OrdersController {
     return this.odersService.findMany();
   }
 
-  @Get('id')
+  @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   async findById(@Param('id', IsMongoIdPipe) id: string) {
     return await this.odersService.findById(id);
@@ -34,7 +38,7 @@ export class OrdersController {
     return this.odersService.create(payload);
   }
 
-  @Put('id')
+  @Put(':id')
   async update(
     @Param('id', IsMongoIdPipe) id: string,
     payload: UpdateOrderDto,
@@ -42,8 +46,24 @@ export class OrdersController {
     return await this.odersService.update(id, payload);
   }
 
-  @Delete('id')
+  @Put(':id/products')
+  async updateProducts(
+    @Param('id', IsMongoIdPipe) id: string,
+    @Body() payload: AddProductstoOderDto,
+  ) {
+    return await this.odersService.addProduct(id, payload.productsIds);
+  }
+
+  @Delete(':id')
   async remove(@Param('id', IsMongoIdPipe) id: string) {
     return await this.odersService.remove(id);
+  }
+
+  @Delete(':id/products/:productId')
+  async removeProduct(
+    @Param('id', IsMongoIdPipe) id: string,
+    @Param('productId', IsMongoIdPipe) productId: string,
+  ) {
+    return this.odersService.removeProduct(id, productId);
   }
 }
