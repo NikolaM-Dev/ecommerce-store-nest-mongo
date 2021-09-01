@@ -1,0 +1,19 @@
+# @name create
+
+POST {{HOST}}/customers
+Content-Type: application/json
+
+{
+  "name": "Camilo",
+  "phone": "3116086709",
+  "skills": [
+    {
+      "name": "liderazgo",
+      "color": "amarillo"
+    },
+    {
+      "name": "proactivo",
+      "color": "green"
+    }
+  ]
+}
