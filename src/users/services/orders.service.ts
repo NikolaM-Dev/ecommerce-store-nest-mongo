@@ -12,11 +12,19 @@ export class OrdersService {
   ) {}
 
   findMany() {
-    return this.orderModel.find().exec();
+    return this.orderModel
+      .find()
+      .populate('customer')
+      .populate('products')
+      .exec();
   }
 
   async findById(id: string) {
-    const order = await this.orderModel.findById(id);
+    const order = await this.orderModel
+      .findById(id)
+      .populate('customer')
+      .populate('products')
+      .exec();
 
     if (!order) throw new NotFoundException(`Order with id ${id} not found`);
 
@@ -32,6 +40,8 @@ export class OrdersService {
   async update(id: string, payload: UpdateOrderDto) {
     const order = await this.orderModel
       .findByIdAndUpdate(id, { $set: payload }, { new: true })
+      .populate('customer')
+      .populate('products')
       .exec();
 
     if (!order) throw new NotFoundException(`Order with id ${id} not found`);
@@ -42,6 +52,10 @@ export class OrdersService {
   async remove(id: string) {
     this.findById(id);
 
-    return this.orderModel.findByIdAndDelete(id);
+    return this.orderModel
+      .findByIdAndDelete(id)
+      .populate('customer')
+      .populate('products')
+      .exec();
   }
 }
