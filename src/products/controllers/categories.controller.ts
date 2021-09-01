@@ -26,7 +26,7 @@ export class CategoriesController {
     return this.categoriesService.findMany();
   }
 
-  @Get('id')
+  @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   async findById(@Param('id', IsMongoIdPipe) id: string) {
     return await this.categoriesService.findById(id);
@@ -37,7 +37,7 @@ export class CategoriesController {
     return this.categoriesService.create(payload);
   }
 
-  @Put('id')
+  @Put(':id')
   async update(
     @Param('id', IsMongoIdPipe) id: string,
     @Body() payload: UpdateCategoryDto,
@@ -45,7 +45,7 @@ export class CategoriesController {
     return await this.categoriesService.update(id, payload);
   }
 
-  @Delete('id')
+  @Delete(':id')
   async remove(@Param('id', IsMongoIdPipe) id: string) {
     return await this.categoriesService.remove(id);
   }

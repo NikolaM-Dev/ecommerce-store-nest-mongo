@@ -25,7 +25,7 @@ export class BrandsController {
     return this.brandsService.findMany();
   }
 
-  @Get('id')
+  @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   async findById(@Param('id', IsMongoIdPipe) id: string) {
     return await this.brandsService.findById(id);
@@ -36,7 +36,7 @@ export class BrandsController {
     return this.brandsService.create(payload);
   }
 
-  @Put('id')
+  @Put(':id')
   async update(
     @Param('id', IsMongoIdPipe) id: string,
     @Body() payload: UpdateBrandDto,
@@ -44,7 +44,7 @@ export class BrandsController {
     return await this.brandsService.update(id, payload);
   }
 
-  @Delete('id')
+  @Delete(':id')
   async remove(@Param('id', IsMongoIdPipe) id: string) {
     return await this.brandsService.remove(id);
   }

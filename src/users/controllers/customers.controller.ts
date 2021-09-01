@@ -25,7 +25,7 @@ export class CustomersController {
     return this.customersService.findMany();
   }
 
-  @Get('id')
+  @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   async findById(@Param('id', IsMongoIdPipe) id: string) {
     return await this.customersService.findById(id);
@@ -36,7 +36,7 @@ export class CustomersController {
     return this.customersService.create(payload);
   }
 
-  @Put('id')
+  @Put(':id')
   async update(
     @Param('id', IsMongoIdPipe) id: string,
     payload: UpdateCustomerDto,
@@ -44,7 +44,7 @@ export class CustomersController {
     return await this.customersService.update(id, payload);
   }
 
-  @Delete('id')
+  @Delete(':id')
   async remove(@Param('id', IsMongoIdPipe) id: string) {
     return await this.customersService.remove(id);
   }
