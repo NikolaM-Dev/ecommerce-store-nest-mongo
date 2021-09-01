@@ -1,6 +1,8 @@
 import { Document, Types } from 'mongoose';
 import { SchemaFactory, Schema, Prop } from '@nestjs/mongoose';
 
+import { SkillSchema, Skill } from './skill.entity';
+
 @Schema()
 export class Customer extends Document {
   @Prop({ type: 'String', required: true })
@@ -12,10 +14,8 @@ export class Customer extends Document {
   @Prop({ type: 'Number', required: true })
   phone: string;
 
-  @Prop({
-    type: [{ name: { type: String }, color: { type: String } }],
-  })
-  skills: Types.Array<Record<string, any>>;
+  @Prop({ type: [SkillSchema] })
+  skills: Types.Array<Skill>;
 }
 
 export const CustomerSchema = SchemaFactory.createForClass(Customer);

@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsString } from 'class-validator';
+import { PartialType } from '@nestjs/swagger';
 
-export class Skills {
+export class CreateSkillDto {
   @IsNotEmpty()
   @IsString()
   readonly name: string;
@@ -9,3 +10,5 @@ export class Skills {
   @IsString()
   readonly color: string;
 }
+
+export class UpdateSkillDto extends PartialType(CreateSkillDto) {}
