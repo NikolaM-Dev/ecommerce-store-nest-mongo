@@ -1,18 +1,23 @@
 import {
-  Body,
   Controller,
-  Delete,
   Get,
   Param,
-  Post,
-  Put,
   HttpStatus,
   HttpCode,
+  Post,
+  Body,
+  Put,
+  Delete,
+  Query,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
-import { ParseIntPipe } from 'src/common/parse-int.pipe';
+import {
+  CreateProductDto,
+  FilterProductstDto,
+  UpdateProductDto,
+} from '../dtos/products.dto';
+import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
 import { ProductsService } from '../services/products.service';
 
 @ApiTags('products')
@@ -20,15 +25,16 @@ import { ProductsService } from '../services/products.service';
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
+  @ApiOperation({ summary: 'List of products' })
   @Get()
-  getAll() {
-    return this.productsService.findAll();
+  async findMany(@Query() params: FilterProductstDto) {
+    return await this.productsService.findMany(params);
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.findById(id);
+  async findById(@Param('id', IsMongoIdPipe) id: string) {
+    return await this.productsService.findById(id);
   }
 
   @Post()
@@ -38,14 +44,14 @@ export class ProductsController {
 
   @Put(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', IsMongoIdPipe) id: string,
     @Body() payload: UpdateProductDto,
   ) {
     return this.productsService.update(id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.delete(id);
+  remove(@Param('id', IsMongoIdPipe) id: string) {
+    return this.productsService.remove(id);
   }
 }

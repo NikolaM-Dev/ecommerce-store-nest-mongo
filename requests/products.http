@@ -1,0 +1,46 @@
+# @name findMany
+GET {{HOST}}/products
+?
+# &limit=2
+# &offset=0
+# &minPrice=100
+# &maxPrice=1000
+
+###
+
+# @name findByID
+GET {{HOST}}/products/612eba90290ed5cbb385f18e
+
+###
+
+# @name create
+POST {{HOST}}/products
+Content-Type: application/json
+
+{
+  "name": "Yogurt",
+  "price": 1500,
+  "stock": 43,
+  "description": "yogo yogo brand yogurt",
+  "image": "http://yogoyogo.png",
+  "category": {
+    "name": "Comida",
+    "image": "https://comida-category.com"
+  },
+  "brand": "612d02f5035f71c228fe6663"
+}
+
+###
+
+# @name update
+PUT {{HOST}}/products/61241d956cb8859a49288a3f
+Content-Type: application/json
+
+{
+  "description": "Cereal de arroz cubierto con sabor a chocolate con vitaminas y minerales"
+}
+
+###
+
+# @name remove
+DELETE {{HOST}}/products/612d37f553e30ece02efa1af

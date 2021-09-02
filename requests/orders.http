@@ -1,0 +1,60 @@
+# @name findMany
+GET {{HOST}}/orders
+?
+# &limit=2
+# &offset=0
+# &minPrice=100
+# &maxPrice=1000
+
+###
+
+# @name findByID
+GET {{HOST}}/orders/612eba90290ed5cbb385f18e
+
+###
+
+# @name create
+POST {{HOST}}/orders
+Content-Type: application/json
+
+{
+  "date": "2021-10-12",
+  "customer": "612f8d5195ec17ce5ab320fe",
+  "products": [
+    "61241d736cb8859a49288a3d",
+    "61241d736cb8859a49288a3b"
+  ]
+}
+
+###
+
+# @name update
+PUT {{HOST}}/orders/
+Content-Type: application/json
+
+{
+  "date": "2021-11-12"
+}
+
+###
+
+# @name addProducts
+PUT {{HOST}}/orders/612fb34b615b4af5178a033e/products
+Content-Type: application/json
+
+{
+  "productsIds": [
+    "61241d736cb8859a49288a3d",
+    "61241d736cb8859a49288a3b"
+  ]
+}
+
+###
+
+# @name remove
+DELETE {{HOST}}/orders/
+
+###
+
+# @name removeProduct
+DELETE {{HOST}}/orders/612fb34b615b4af5178a033e/products/61241d736cb8859a49288a3b

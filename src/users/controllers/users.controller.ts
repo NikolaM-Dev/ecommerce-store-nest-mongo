@@ -1,19 +1,19 @@
 import {
+  Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
   Param,
-  Put,
   Post,
-  Body,
-  Delete,
+  Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
-import { ParseIntPipe } from 'src/common/parse-int.pipe';
 import { UsersService } from '../services/users.service';
+import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
 
 @ApiTags('users')
 @Controller('users')
@@ -21,20 +21,20 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  getAll() {
-    return this.usersService.findAll();
+  findMany() {
+    return this.usersService.findMany();
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.findById(id);
+  async findById(@Param('id') id: string) {
+    return await this.usersService.findById(id);
   }
 
   @Get(':id/orders')
   @HttpCode(HttpStatus.ACCEPTED)
-  findOrder(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.findOrderByUser(id);
+  async findOrderByUserId(@Param('id', IsMongoIdPipe) id: string) {
+    return await this.usersService.findOrderByUserId(id);
   }
 
   @Post()
@@ -43,15 +43,15 @@ export class UsersController {
   }
 
   @Put(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
+  async update(
+    @Param('id', IsMongoIdPipe) id: string,
     @Body() payload: UpdateUserDto,
   ) {
-    return this.usersService.update(id, payload);
+    return await this.usersService.update(id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.delete(id);
+  async remove(@Param('id', IsMongoIdPipe) id: string) {
+    return await this.usersService.remove(id);
   }
 }

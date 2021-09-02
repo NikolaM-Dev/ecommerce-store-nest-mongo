@@ -1,19 +1,19 @@
 import {
-  Body,
   Controller,
-  Delete,
   Get,
   Param,
-  Post,
-  Put,
   HttpStatus,
   HttpCode,
+  Post,
+  Put,
+  Delete,
+  Body,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { CategoriesService } from '../services/categories.service';
 import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
-import { ParseIntPipe } from 'src/common/parse-int.pipe';
+import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
 
 @ApiTags('categories')
 @Controller('categories')
@@ -22,14 +22,14 @@ export class CategoriesController {
 
   @Get()
   @ApiOperation({ summary: 'List of categories' })
-  getAll() {
-    return this.categoriesService.findAll();
+  findMany() {
+    return this.categoriesService.findMany();
   }
 
-  @Get('id')
+  @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  GetOne(@Param('id', ParseIntPipe) id: number) {
-    return this.categoriesService.findById(id);
+  async findById(@Param('id', IsMongoIdPipe) id: string) {
+    return await this.categoriesService.findById(id);
   }
 
   @Post()
@@ -37,16 +37,16 @@ export class CategoriesController {
     return this.categoriesService.create(payload);
   }
 
-  @Put('id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
+  @Put(':id')
+  async update(
+    @Param('id', IsMongoIdPipe) id: string,
     @Body() payload: UpdateCategoryDto,
   ) {
-    return this.categoriesService.update(id, payload);
+    return await this.categoriesService.update(id, payload);
   }
 
-  @Delete('id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.categoriesService.delete(id);
+  @Delete(':id')
+  async remove(@Param('id', IsMongoIdPipe) id: string) {
+    return await this.categoriesService.remove(id);
   }
 }

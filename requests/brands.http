@@ -1,0 +1,7 @@
+# @name findMany
+GET {{HOST}}/brands
+
+###
+
+# @name findById
+GET {{HOST}}/brands/612d02f5035f71c228fe6663

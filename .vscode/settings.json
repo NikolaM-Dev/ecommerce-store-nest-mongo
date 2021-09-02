@@ -1,0 +1,10 @@
+{
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "HOST": "http://localhost:3000"
+    },
+    "production": {
+      "HOST": "https://fathomless-chamber-23575.herokuapp.com"
+    }
+  }
+}
