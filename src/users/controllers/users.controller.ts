@@ -27,7 +27,7 @@ export class UsersController {
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  async findById(@Param('id') id: string) {
+  async findById(@Param('id', IsMongoIdPipe) id: string) {
     return await this.usersService.findById(id);
   }
 
@@ -38,8 +38,8 @@ export class UsersController {
   }
 
   @Post()
-  create(@Body() payload: CreateUserDto) {
-    return this.usersService.create(payload);
+  async create(@Body() payload: CreateUserDto) {
+    return await this.usersService.create(payload);
   }
 
   @Put(':id')

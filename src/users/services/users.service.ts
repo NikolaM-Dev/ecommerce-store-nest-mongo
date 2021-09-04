@@ -25,10 +25,14 @@ export class UsersService {
     return user;
   }
 
-  create(payload: CreateUserDto) {
+  async findByEmail(email: string) {
+    return await this.userModel.findOne({ email }).exec();
+  }
+
+  async create(payload: CreateUserDto) {
     const newUser = new this.userModel(payload);
 
-    return newUser.save();
+    return await newUser.save();
   }
 
   async update(id: string, payload: UpdateUserDto) {
