@@ -1,0 +1,19 @@
+# @name findMany
+GET {{HOST}}/users
+
+###
+
+# @name findById
+GET {{HOST}}/users/61338c9ab8fa6044d3e53876
+
+###
+
+# @name create
+POST {{HOST}}/users
+Content-Type: application/json
+
+{
+  "email": "nikolaNffew@gmail.com",
+  "password": "NikpasolaP4312",
+  "role": "ADMIN"
+}
