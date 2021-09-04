@@ -1,3 +1,9 @@
 # @name home
 GET {{HOST}}
 
+###
+
+# @name new
+GET {{HOST}}/new
+# Headers
+Auth: SECRET_API_KEY_9998
