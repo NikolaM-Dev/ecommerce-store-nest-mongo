@@ -13,7 +13,7 @@ POST {{HOST}}/users
 Content-Type: application/json
 
 {
-  "email": "nikolaNffew@gmail.com",
-  "password": "NikpasolaP4312",
+  "email": "nikolanuevo@gmail.com",
+  "password": "1234563",
   "role": "ADMIN"
 }

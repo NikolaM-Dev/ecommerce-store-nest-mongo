@@ -1,0 +1,8 @@
+# @name login
+POST {{HOST}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "nikolanuevo@gmail.comm",
+  "password": "123456"
+}
