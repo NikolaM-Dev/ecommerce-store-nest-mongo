@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -30,6 +34,11 @@ export class UsersService {
   }
 
   async create(payload: CreateUserDto) {
+    const { email } = payload;
+
+    const user = await this.userModel.findOne({ email }).exec();
+    if (user) throw new BadRequestException(`Email ${email} already exists`);
+
     const newUser = new this.userModel(payload);
 
     return await newUser.save();
