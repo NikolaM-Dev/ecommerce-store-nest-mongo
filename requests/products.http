@@ -1,21 +1,39 @@
+# Variables
+@acces_token = {{login.response.body.access_token}}
+@authorization = Authorization: Bearer {{acces_token}}
+
+# @name login
+POST {{HOST}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "nikolanuevo@gmail.com",
+  "password": "123456"
+}
+
+###
+
 # @name findMany
 GET {{HOST}}/products
-?
+# ?
 # &limit=2
 # &offset=0
 # &minPrice=100
 # &maxPrice=1000
+{{authorization}}
 
 ###
 
 # @name findByID
 GET {{HOST}}/products/612eba90290ed5cbb385f18e
+{{authorization}}
 
 ###
 
 # @name create
 POST {{HOST}}/products
 Content-Type: application/json
+{{authorization}}
 
 {
   "name": "Yogurt",
@@ -35,6 +53,7 @@ Content-Type: application/json
 # @name update
 PUT {{HOST}}/products/61241d956cb8859a49288a3f
 Content-Type: application/json
+{{authorization}}
 
 {
   "description": "Cereal de arroz cubierto con sabor a chocolate con vitaminas y minerales"
@@ -44,3 +63,4 @@ Content-Type: application/json
 
 # @name remove
 DELETE {{HOST}}/products/612d37f553e30ece02efa1af
+{{authorization}}
