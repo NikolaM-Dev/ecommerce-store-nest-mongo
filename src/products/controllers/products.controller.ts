@@ -11,6 +11,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { UseGuards } from '@nestjs/common';
 
 import {
   CreateProductDto,
@@ -21,6 +23,7 @@ import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
 import { ProductsService } from '../services/products.service';
 
 @ApiTags('products')
+@UseGuards(AuthGuard('jwt'))
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
