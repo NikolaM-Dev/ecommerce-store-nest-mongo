@@ -21,7 +21,7 @@ export class AuthService {
     return null;
   }
 
-  async generateJWT(user: User) {
+  async login(user: User) {
     const payload: PayloadToken = { role: user.role, sub: user.id };
 
     return {
