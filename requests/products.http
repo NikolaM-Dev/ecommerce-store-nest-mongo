@@ -2,6 +2,7 @@
 @acces_token = {{login.response.body.access_token}}
 @authorization = Authorization: Bearer {{acces_token}}
 
+
 # @name login
 POST {{HOST}}/auth/login
 Content-Type: application/json
@@ -15,7 +16,7 @@ Content-Type: application/json
 
 # @name findMany
 GET {{HOST}}/products
-# ?
+?
 # &limit=2
 # &offset=0
 # &minPrice=100
