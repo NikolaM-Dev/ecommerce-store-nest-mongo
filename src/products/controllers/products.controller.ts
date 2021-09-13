@@ -36,6 +36,7 @@ export class ProductsController {
     return await this.productsService.findMany(params);
   }
 
+  @Public()
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   async findById(@Param('id', IsMongoIdPipe) id: string) {
