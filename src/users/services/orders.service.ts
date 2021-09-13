@@ -31,6 +31,14 @@ export class OrdersService {
     return order;
   }
 
+  async findManyByCustomer(customerId: string) {
+    return await this.orderModel
+      .find({ customer: customerId })
+      .populate('customer')
+      .populate('products')
+      .exec();
+  }
+
   create(payload: CreateOrderDto) {
     const newOrder = new this.orderModel(payload);
 
