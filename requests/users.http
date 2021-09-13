@@ -4,7 +4,7 @@ GET {{HOST}}/users
 ###
 
 # @name findById
-GET {{HOST}}/users/61338c9ab8fa6044d3e53876
+GET {{HOST}}/users/613f787071f5b19b0d48795e
 
 ###
 
