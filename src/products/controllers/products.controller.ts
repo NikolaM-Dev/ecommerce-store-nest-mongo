@@ -11,7 +11,6 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 import { UseGuards } from '@nestjs/common';
 
 import {
@@ -20,14 +19,17 @@ import {
   UpdateProductDto,
 } from '../dtos/products.dto';
 import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { ProductsService } from '../services/products.service';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @ApiTags('products')
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(JwtAuthGuard)
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
+  @Public()
   @ApiOperation({ summary: 'List of products' })
   @Get()
   async findMany(@Query() params: FilterProductstDto) {
