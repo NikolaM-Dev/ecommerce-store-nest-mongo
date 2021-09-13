@@ -26,7 +26,7 @@ GET {{HOST}}/products
 ###
 
 # @name findByID
-GET {{HOST}}/products/612eba90290ed5cbb385f18e
+GET {{HOST}}/products/61241d736cb8859a49288a3d
 {{authorization}}
 
 ###
