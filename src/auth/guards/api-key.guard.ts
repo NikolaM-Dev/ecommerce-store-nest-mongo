@@ -23,7 +23,7 @@ export class ApiKeyGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const isPublic: boolean = this.reflector.get(
+    const isPublic: boolean = this.reflector.get<boolean>(
       IS_PUBLIC,
       context.getHandler(),
     );
