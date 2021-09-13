@@ -8,7 +8,7 @@ GET {{HOST}}/users/61338c9ab8fa6044d3e53876
 
 ###
 
-# @name create
+# @name createAdmin
 POST {{HOST}}/users
 Content-Type: application/json
 
@@ -16,4 +16,16 @@ Content-Type: application/json
   "email": "nikolanuevo3@gmail.com",
   "password": "1234563",
   "role": "ADMIN"
+}
+
+###
+
+# @name createCustomer
+POST {{HOST}}/users
+Content-Type: application/json
+
+{
+  "email": "bob@gmail.com",
+  "password": "1234563",
+  "role": "customer"
 }

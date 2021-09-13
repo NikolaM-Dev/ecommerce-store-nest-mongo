@@ -2,7 +2,6 @@
 @acces_token = {{login.response.body.access_token}}
 @authorization = Authorization: Bearer {{acces_token}}
 
-
 # @name login
 POST {{HOST}}/auth/login
 Content-Type: application/json
@@ -10,6 +9,28 @@ Content-Type: application/json
 {
   "email": "nikolanuevo@gmail.com",
   "password": "123456"
+}
+
+###
+
+# @name loginAdmin
+POST {{HOST}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "nikolanuevo@gmail.com",
+  "password": "123456"
+}
+
+###
+
+# @name loginCustomer
+POST {{HOST}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "bob@gmail.com",
+  "password": "1234563"
 }
 
 ###
