@@ -15,7 +15,7 @@ import { CategoriesService } from '../services/categories.service';
 import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
 import { IsMongoIdPipe } from '../../../common/is-mongo-id.pipe';
 
-@ApiTags('categories')
+@ApiTags('Categories')
 @Controller('categories')
 export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
@@ -27,17 +27,20 @@ export class CategoriesController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Find a category  by ID' })
   @HttpCode(HttpStatus.ACCEPTED)
   async findById(@Param('id', IsMongoIdPipe) id: string) {
     return await this.categoriesService.findById(id);
   }
 
   @Post()
+  @ApiOperation({ summary: 'Create a category' })
   create(@Body() payload: CreateCategoryDto) {
     return this.categoriesService.create(payload);
   }
 
   @Put(':id')
+  @ApiOperation({ summary: 'Update a category by ID' })
   async update(
     @Param('id', IsMongoIdPipe) id: string,
     @Body() payload: UpdateCategoryDto,
@@ -46,6 +49,7 @@ export class CategoriesController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Remove a category by ID' })
   async remove(@Param('id', IsMongoIdPipe) id: string) {
     return await this.categoriesService.remove(id);
   }
