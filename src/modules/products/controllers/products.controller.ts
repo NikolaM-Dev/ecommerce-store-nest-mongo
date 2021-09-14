@@ -26,7 +26,7 @@ import { Role } from 'src/auth/models/role.model';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { RolesGuard } from '../../../auth/guards/roles.guard';
 
-@ApiTags('products')
+@ApiTags('Products')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('products')
 export class ProductsController {
@@ -41,6 +41,7 @@ export class ProductsController {
 
   @Public()
   @Get(':id')
+  @ApiOperation({ summary: 'Find a product  by ID' })
   @HttpCode(HttpStatus.ACCEPTED)
   async findById(@Param('id', IsMongoIdPipe) id: string) {
     return await this.productsService.findById(id);
@@ -48,12 +49,14 @@ export class ProductsController {
 
   @Roles(Role.ADMIN)
   @Post()
+  @ApiOperation({ summary: 'Create a product' })
   create(@Body() payload: CreateProductDto) {
     return this.productsService.create(payload);
   }
 
   @Roles(Role.ADMIN)
   @Put(':id')
+  @ApiOperation({ summary: 'Update a product by ID' })
   update(
     @Param('id', IsMongoIdPipe) id: string,
     @Body() payload: UpdateProductDto,
@@ -63,6 +66,7 @@ export class ProductsController {
 
   @Roles(Role.ADMIN)
   @Delete(':id')
+  @ApiOperation({ summary: 'Remove a product by ID' })
   remove(@Param('id', IsMongoIdPipe) id: string) {
     return this.productsService.remove(id);
   }
