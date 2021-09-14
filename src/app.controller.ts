@@ -23,10 +23,4 @@ export class AppController {
   new() {
     return "Hi i'm new";
   }
-
-  @Get('tasks')
-  @ApiOperation({ summary: 'List of tasks' })
-  async findManyTasks() {
-    return await this.appService.findManyTasks();
-  }
 }
