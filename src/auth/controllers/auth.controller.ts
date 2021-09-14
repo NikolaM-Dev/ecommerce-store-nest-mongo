@@ -4,7 +4,7 @@ import { Request } from 'express';
 
 import { AuthService } from '../services/auth.service';
 import { User } from '../../modules/users/entities/user.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -13,6 +13,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard('local'))
   @Post('login')
+  @ApiOperation({ summary: 'Login' })
   login(@Req() req: Request) {
     const user = req.user as User;
 
