@@ -4,7 +4,9 @@ import { Request } from 'express';
 
 import { AuthService } from '../services/auth.service';
 import { User } from '../../modules/users/entities/user.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
