@@ -12,6 +12,7 @@ import {
 } from 'class-validator';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 
+import { Category } from '../entities/category.entity';
 import { CreateCategoryDto } from './categories.dto';
 
 export class CreateProductDto {
@@ -43,7 +44,7 @@ export class CreateProductDto {
   readonly image: string;
 
   @IsNotEmpty()
-  @ApiProperty({ description: 'Image URL' })
+  @ApiProperty({ description: 'Product category', type: Category })
   @ValidateNested()
   readonly category: CreateCategoryDto;
 

@@ -41,7 +41,7 @@ export class ProductsController {
 
   @Public()
   @Get(':id')
-  @ApiOperation({ summary: 'Find a product  by ID' })
+  @ApiOperation({ summary: 'Find a product by ID' })
   @HttpCode(HttpStatus.ACCEPTED)
   async findById(@Param('id', IsMongoIdPipe) id: string) {
     return await this.productsService.findById(id);
