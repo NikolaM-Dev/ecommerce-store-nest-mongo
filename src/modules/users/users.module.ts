@@ -3,7 +3,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { CustomersController } from './controllers/customers.controller';
 import { CustomersService } from './services/customers.service';
-import { ProductsModule } from 'src/products/products.module';
 import { UsersController } from './controllers/users.controller';
 import { UsersService } from './services/users.service';
 import { Customer, CustomerSchema } from './entities/customer.entity';
@@ -12,6 +11,7 @@ import { OrdersController } from './controllers/orders.controller';
 import { OrdersService } from './services/orders.service';
 import { Order, OrderSchema } from './entities/order.entity';
 import { ProfileController } from './controllers/profile.controller';
+import { ProductsModule } from '../products/products.module';
 
 @Module({
   imports: [
@@ -31,7 +31,12 @@ import { ProfileController } from './controllers/profile.controller';
     ]),
     ProductsModule,
   ],
-  controllers: [CustomersController, UsersController, OrdersController, ProfileController],
+  controllers: [
+    CustomersController,
+    OrdersController,
+    ProfileController,
+    UsersController,
+  ],
   providers: [CustomersService, UsersService, OrdersService],
   exports: [UsersService],
 })

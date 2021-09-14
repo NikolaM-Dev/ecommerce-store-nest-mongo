@@ -18,13 +18,13 @@ import {
   FilterProductstDto,
   UpdateProductDto,
 } from '../dtos/products.dto';
-import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
-import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { IsMongoIdPipe } from '../../../common/is-mongo-id.pipe';
+import { JwtAuthGuard } from '../../../auth/guards/jwt-auth.guard';
 import { ProductsService } from '../services/products.service';
 import { Public } from 'src/auth/decorators/public.decorator';
-import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/models/role.model';
-import { RolesGuard } from '../../auth/guards/roles.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { RolesGuard } from '../../../auth/guards/roles.guard';
 
 @ApiTags('products')
 @UseGuards(JwtAuthGuard, RolesGuard)

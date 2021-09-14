@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 
-import { UsersService } from '../../users/services/users.service';
-import { User } from '../../users/entities/user.entity';
+import { UsersService } from '../../modules/users/services/users.service';
+import { User } from '../../modules/users/entities/user.entity';
 import { PayloadToken } from '../models/token.model';
 
 @Injectable()

@@ -7,7 +7,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
-import { ProductsService } from 'src/products/services/products.service';
+import { ProductsService } from '../../products/services/products.service';
 import { User } from '../entities/user.entity';
 
 @Injectable()

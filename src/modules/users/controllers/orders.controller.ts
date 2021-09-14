@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 
 import { OrdersService } from '../services/orders.service';
-import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
+import { IsMongoIdPipe } from '../../../common/is-mongo-id.pipe';
 import {
   CreateOrderDto,
   UpdateOrderDto,

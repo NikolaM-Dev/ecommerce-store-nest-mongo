@@ -13,7 +13,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { CategoriesService } from '../services/categories.service';
 import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
-import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
+import { IsMongoIdPipe } from '../../../common/is-mongo-id.pipe';
 
 @ApiTags('categories')
 @Controller('categories')

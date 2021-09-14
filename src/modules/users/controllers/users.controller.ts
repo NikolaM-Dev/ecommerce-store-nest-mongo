@@ -13,7 +13,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
 import { UsersService } from '../services/users.service';
-import { IsMongoIdPipe } from '../../common/is-mongo-id.pipe';
+import { IsMongoIdPipe } from '../../../common/is-mongo-id.pipe';
 
 @ApiTags('users')
 @Controller('users')
