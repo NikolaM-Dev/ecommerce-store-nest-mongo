@@ -16,7 +16,7 @@ export class ProductsService {
   ) {}
 
   async findMany(params?: FilterProductstDto) {
-    const { limit = 5, offset = 0, minPrice, maxPrice } = params;
+    const { limit = 10, offset = 0, minPrice, maxPrice } = params;
     const filters: FilterQuery<Product> = {};
 
     if (minPrice && maxPrice)
