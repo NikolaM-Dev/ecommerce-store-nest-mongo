@@ -1,9 +1,24 @@
-# Description
+# REST API with NestJS + Moongose + Auth + Swagger
 
-`Rest API` to learn nestjs professionally
+## Why?
 
-![api/docs](./assets/images/api_docs.png)
-![endpoint](./assets/images/endpoint.png)
+- REST APIs are the staple of the web development industry
+- Knowing how REST APIs is important for both back and frontend developers
+- There's no better way to understand how they work than to build one
+
+## Concepts
+
+- REST API
+- JWT and Passport Auth
+- Data persistence in MongoDB
+- Documentation with OpenAPI
+
+## Technologies
+
+- Node.js
+- MongoDB with Mongoose
+- Typescript
+- NestJS
 
 ## Installation
 
@@ -28,15 +43,12 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Test endpoints
 
-```bash
-# unit tests
-$ npm run test
+In the request folder, you will find a list of endpoints ready to test in VS Code with the extension [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 
-# e2e tests
-$ npm run test:e2e
+### Endpoints Documentation
 
-# test coverage
-$ npm run test:cov
-```
+- `http://localhost:3000/api/docs`
+
+![endpoints swagger](./assets/images/api_docs.png)
