@@ -1,5 +1,5 @@
-import { Module, Global } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
+import { Module, Global } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import config from '../config';

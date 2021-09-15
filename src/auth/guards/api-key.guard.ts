@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 
-import { IS_PUBLIC } from '../decorators/public.decorator';
+import { IS_PUBLIC } from '../decorators';
 import config from 'src/config';
 
 @Injectable()

@@ -1,9 +1,9 @@
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, UseGuards } from '@nestjs/common';
 
+import { ApiKeyGuard } from './auth/guards';
 import { AppService } from './app.service';
-import { Public } from './auth/decorators/public.decorator';
-import { ApiKeyGuard } from './auth/guards/api-key.guard';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Public } from './auth/decorators';
 
 @ApiTags('Root')
 @UseGuards(ApiKeyGuard)

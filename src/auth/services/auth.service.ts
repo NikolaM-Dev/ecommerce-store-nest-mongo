@@ -1,10 +1,10 @@
+import { compare } from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { compare } from 'bcrypt';
 
-import { UsersService } from '../../modules/users/services/users.service';
+import { PayloadToken } from '../models';
 import { User } from '../../modules/users/entities/user.entity';
-import { PayloadToken } from '../models/token.model';
+import { UsersService } from '../../modules/users/services/users.service';
 
 @Injectable()
 export class AuthService {

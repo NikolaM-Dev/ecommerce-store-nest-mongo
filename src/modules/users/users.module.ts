@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
+import { Customer, CustomerSchema } from './entities/customer.entity';
 import { CustomersController } from './controllers/customers.controller';
 import { CustomersService } from './services/customers.service';
-import { UsersController } from './controllers/users.controller';
-import { UsersService } from './services/users.service';
-import { Customer, CustomerSchema } from './entities/customer.entity';
-import { User, UserSchema } from './entities/user.entity';
+import { Order, OrderSchema } from './entities/order.entity';
 import { OrdersController } from './controllers/orders.controller';
 import { OrdersService } from './services/orders.service';
-import { Order, OrderSchema } from './entities/order.entity';
-import { ProfileController } from './controllers/profile.controller';
 import { ProductsModule } from '../products/products.module';
+import { ProfileController } from './controllers/profile.controller';
+import { User, UserSchema } from './entities/user.entity';
+import { UsersController } from './controllers/users.controller';
+import { UsersService } from './services/users.service';
 
 @Module({
   imports: [

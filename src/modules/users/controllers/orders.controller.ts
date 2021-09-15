@@ -1,3 +1,4 @@
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -9,15 +10,14 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
-import { OrdersService } from '../services/orders.service';
-import { IsMongoIdPipe } from '../../../common/is-mongo-id.pipe';
 import {
   CreateOrderDto,
   UpdateOrderDto,
   AddProductstoOderDto,
 } from '../dtos/orders.dto';
+import { IsMongoIdPipe } from 'src/common';
+import { OrdersService } from '../services/orders.service';
 
 @ApiTags('Orders')
 @Controller('orders')

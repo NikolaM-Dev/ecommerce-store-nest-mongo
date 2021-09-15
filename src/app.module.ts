@@ -6,12 +6,12 @@ import * as Joi from 'joi';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './database/database.module';
 import { enviroments } from './enviroments';
-import { UsersModule } from './modules/users/users.module';
-import { AuthModule } from './auth/auth.module';
-import config from './config';
 import { ProductsModule } from './modules/products/products.module';
+import { UsersModule } from './modules/users/users.module';
+import config from './config';
 
 @Module({
   imports: [

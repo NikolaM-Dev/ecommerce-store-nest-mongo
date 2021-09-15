@@ -1,5 +1,5 @@
-import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose';
 
 @Schema()
 export class Brand extends Document {

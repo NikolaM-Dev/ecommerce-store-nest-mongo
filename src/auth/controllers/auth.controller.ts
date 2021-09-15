@@ -1,10 +1,10 @@
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { Request } from 'express';
 
 import { AuthService } from '../services/auth.service';
 import { User } from '../../modules/users/entities/user.entity';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')
 @Controller('auth')

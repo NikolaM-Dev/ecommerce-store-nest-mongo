@@ -1,5 +1,5 @@
-import { IsMongoId, IsNotEmpty, IsDate, IsArray } from 'class-validator';
 import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger';
+import { IsMongoId, IsNotEmpty, IsDate, IsArray } from 'class-validator';
 
 export class CreateOrderDto {
   @IsNotEmpty()
