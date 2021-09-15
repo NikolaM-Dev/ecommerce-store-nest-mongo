@@ -9,14 +9,10 @@ import config from '../config';
   imports: [
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigType<typeof config>) => {
-        const { connection, user, dbName, password, host } =
-          configService.mongo;
+        const { uri } = configService.mongo;
 
         return {
-          uri: `${connection}://${host}`,
-          user,
-          pass: password,
-          dbName,
+          uri,
           useNewUrlParser: true,
           useCreateIndex: true,
           useUnifiedTopology: true,
