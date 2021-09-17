@@ -1,0 +1,7 @@
+{
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "HOST": "http://localhost:3000"
+    }
+  }
+}
