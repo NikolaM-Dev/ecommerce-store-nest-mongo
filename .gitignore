@@ -40,3 +40,6 @@ lerna-debug.log*
 
 # Mongo Data
 /mongo_data
+
+# Postgres Data
+/postgres_data
