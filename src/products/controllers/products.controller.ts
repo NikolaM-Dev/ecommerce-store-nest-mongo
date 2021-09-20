@@ -21,31 +21,31 @@ export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @Get()
-  getAll() {
-    return this.productsService.findAll();
+  async findMany() {
+    return await this.productsService.findMany();
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.findById(id);
+  async findById(@Param('id', ParseIntPipe) id: number) {
+    return await this.productsService.findById(id);
   }
 
   @Post()
-  create(@Body() payload: CreateProductDto) {
-    return this.productsService.create(payload);
+  async create(@Body() payload: CreateProductDto) {
+    return await this.productsService.create(payload);
   }
 
   @Put(':id')
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdateProductDto,
   ) {
-    return this.productsService.update(id, payload);
+    return await this.productsService.update(id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.delete(id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return await this.productsService.remove(id);
   }
 }
