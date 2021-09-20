@@ -22,13 +22,16 @@ const API_KEY_PROD = 'production1234';
         } = configService.postgres;
 
         return {
+          type: 'postgres',
           host,
           port,
           username,
           password,
           database,
-          entities: [],
+          entities: ['dist/**/*.entity{.ts,.js}'],
           synchronize: true,
+          retryDelay: 3000,
+          retryAttempts: 10,
         };
       },
       inject: [config.KEY],
@@ -64,6 +67,6 @@ const API_KEY_PROD = 'production1234';
       inject: [config.KEY],
     },
   ],
-  exports: ['API_KEY', 'PG', TypeOrmModule],
+  exports: ['API_KEY', 'PG'],
 })
 export class DatabaseModule {}
