@@ -1,2 +1,36 @@
-# @name findManyTasks
-GET {{HOST}}/users/tasks
+# @name findMany
+GET {{HOST}}/products
+
+###
+
+# @name findById
+GET {{HOST}}/products/2
+
+###
+
+# @name create
+POST {{HOST}}/products
+Content-Type: application/json
+
+{
+  "name": "Coca-Cola",
+  "description": "Gaseosa azucarada",
+  "price": 801,
+  "stock": 80,
+  "image": "https://ecommerce.com/coca-cola.png"
+}
+
+###
+
+# @name update
+PUT {{HOST}}/products/2
+Content-Type: application/json
+
+{
+  "image": "https://ecommerce.com/oreo.png"
+}
+
+###
+
+# @name remove
+DELETE {{HOST}}/products/1
