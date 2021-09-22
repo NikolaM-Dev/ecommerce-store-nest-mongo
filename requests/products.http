@@ -23,11 +23,11 @@ Content-Type: application/json
 ###
 
 # @name update
-PUT {{HOST}}/products/2
+PUT {{HOST}}/products/1
 Content-Type: application/json
 
 {
-  "image": "https://ecommerce.com/oreo.png"
+  "stock": 23
 }
 
 ###
