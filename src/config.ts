@@ -12,5 +12,6 @@ export default registerAs('config', () => ({
     password: process.env.POSTGRES_PASSWORD,
     port: parseInt(process.env.POSTGRES_PORT, 10),
     host: process.env.POSTGRES_HOST,
+    synchronize: Boolean(process.env.TYPEORM_SYNCHRONIZE),
   },
 }));

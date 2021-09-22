@@ -27,6 +27,7 @@ import config from './config';
         POSTGRES_PASSWORD: Joi.string().required(),
         POSTGRES_PORT: Joi.number().required(),
         POSTGRES_HOST: Joi.string().required(),
+        TYPEORM_SYNCHRONIZE: Joi.boolean().required(),
       }),
     }),
     HttpModule,

@@ -19,6 +19,7 @@ const API_KEY_PROD = 'production1234';
           user: username,
           password,
           dbName: database,
+          synchronize,
         } = configService.postgres;
 
         return {
@@ -29,7 +30,7 @@ const API_KEY_PROD = 'production1234';
           password,
           database,
           entities: ['dist/**/*.entity{.ts,.js}'],
-          synchronize: true,
+          synchronize,
           retryDelay: 3000,
           retryAttempts: 10,
         };
