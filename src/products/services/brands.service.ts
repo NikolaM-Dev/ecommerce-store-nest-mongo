@@ -1,25 +1,25 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 import { Brand } from '../entities/brand.entity';
 import { CreateBrandDto, UpdateBrandDto } from '../dtos/brands.dto';
 
 @Injectable()
 export class BrandsService {
-  private counterId = 0;
-  private brands: Array<Brand> = [
-    {
-      id: 1,
-      name: 'adidas',
-      image: 'https://adidas.png',
-    },
-  ];
+  constructor(
+    @InjectRepository(Brand)
+    private readonly brandRepository: Repository<Brand>,
+  ) {}
 
-  findAll() {
-    return this.brands;
+  async findMany() {
+    return await this.brandRepository.find();
   }
 
-  findById(id: number) {
-    const brand = this.brands.find((brand) => brand.id === id);
+  async findById(id: number) {
+    const brand = await this.brandRepository.findOne(id, {
+      relations: ['products'],
+    });
 
     if (!brand)
       throw new NotFoundException(`Brand with id ${id} not found in database`);
@@ -27,25 +27,22 @@ export class BrandsService {
     return brand;
   }
 
-  create(payload: CreateBrandDto) {
-    const id = ++this.counterId;
-    const newBrand = { id, ...payload };
-    this.brands.push(newBrand);
+  async create(payload: CreateBrandDto) {
+    const newBrand = this.brandRepository.create(payload);
 
-    return newBrand;
+    return await this.brandRepository.save(newBrand);
   }
 
-  update(id: number, payload: UpdateBrandDto) {
-    const brand = this.findById(id);
-    const index = this.brands.findIndex((brand) => brand.id === id);
-    this.brands[index] = { ...brand, ...payload };
+  async update(id: number, payload: UpdateBrandDto) {
+    const brand = await this.findById(id);
+    this.brandRepository.merge(brand, payload);
 
-    return this.brands[index];
+    return await this.brandRepository.save(brand);
   }
 
-  delete(id: number) {
-    const brand = this.findById(id);
-    this.brands = this.brands.filter((brand) => brand.id !== id);
+  async remove(id: number) {
+    const brand = await this.findById(id);
+    await this.brandRepository.delete(id);
 
     return brand;
   }

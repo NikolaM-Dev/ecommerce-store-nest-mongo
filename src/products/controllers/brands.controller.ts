@@ -15,37 +15,37 @@ import { BrandsService } from '../services/brands.service';
 import { CreateBrandDto, UpdateBrandDto } from '../dtos/brands.dto';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
 
-@ApiTags('brands')
+@ApiTags('Brands')
 @Controller('brands')
 export class BrandsController {
   constructor(private brandsService: BrandsService) {}
 
   @Get()
-  getAll() {
-    return this.brandsService.findAll();
+  async findMany() {
+    return await this.brandsService.findMany();
   }
 
-  @Get('id')
+  @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('id', ParseIntPipe) id: number) {
-    return this.brandsService.findById(id);
+  async findById(@Param('id', ParseIntPipe) id: number) {
+    return await this.brandsService.findById(id);
   }
 
   @Post()
-  create(@Body() payload: CreateBrandDto) {
-    return this.brandsService.create(payload);
+  async create(@Body() payload: CreateBrandDto) {
+    return await this.brandsService.create(payload);
   }
 
-  @Put('id')
-  update(
+  @Put(':id')
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdateBrandDto,
   ) {
-    return this.brandsService.update(id, payload);
+    return await this.brandsService.update(id, payload);
   }
 
-  @Delete('id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.brandsService.delete(id);
+  @Delete(':id')
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return await this.brandsService.remove(id);
   }
 }
