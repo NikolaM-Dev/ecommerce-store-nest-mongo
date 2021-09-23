@@ -15,38 +15,38 @@ import { CategoriesService } from '../services/categories.service';
 import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
 
-@ApiTags('categories')
+@ApiTags('Categories')
 @Controller('categories')
 export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
 
   @Get()
   @ApiOperation({ summary: 'List of categories' })
-  getAll() {
-    return this.categoriesService.findAll();
+  async findMany() {
+    return await this.categoriesService.findMany();
   }
 
-  @Get('id')
+  @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  GetOne(@Param('id', ParseIntPipe) id: number) {
-    return this.categoriesService.findById(id);
+  async findById(@Param('id', ParseIntPipe) id: number) {
+    return await this.categoriesService.findById(id);
   }
 
   @Post()
-  create(@Body() payload: CreateCategoryDto) {
-    return this.categoriesService.create(payload);
+  async create(@Body() payload: CreateCategoryDto) {
+    return await this.categoriesService.create(payload);
   }
 
-  @Put('id')
-  update(
+  @Put(':id')
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdateCategoryDto,
   ) {
-    return this.categoriesService.update(id, payload);
+    return await this.categoriesService.update(id, payload);
   }
 
-  @Delete('id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.categoriesService.delete(id);
+  @Delete(':id')
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return await this.categoriesService.remove(id);
   }
 }
