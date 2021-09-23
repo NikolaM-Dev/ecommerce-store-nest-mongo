@@ -1,8 +1,9 @@
-import { ConfigService } from '@nestjs/config';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
-import { Order } from '../entities/order.entity';
+import { CustomersService } from './customers.service';
 import { ProductsService } from 'src/products/services/products.service';
 import { User } from '../entities/user.entity';
 
@@ -10,29 +11,20 @@ import { User } from '../entities/user.entity';
 export class UsersService {
   constructor(
     private productsService: ProductsService,
-    private configService: ConfigService,
+    private readonly customersService: CustomersService,
+    @InjectRepository(User) private readonly userReposity: Repository<User>,
   ) {}
 
-  private counterId = 0;
-  private users: Array<User> = [
-    {
-      id: 1,
-      email: 'nikola@gmail.com',
-      password: '123456',
-      role: 'ADMIN',
-    },
-  ];
-
-  findAll() {
-    const apiKey = this.configService.get('API_KEY');
-    const dbName = this.configService.get('DATABASE_NAME');
-    console.log(apiKey, dbName);
-
-    return this.users;
+  async findMany() {
+    return await this.userReposity.find({
+      relations: ['customer'],
+    });
   }
 
-  findById(id: number) {
-    const user = this.users.find((user) => user.id === id);
+  async findById(id: number) {
+    const user = await this.userReposity.findOne(id, {
+      relations: ['customer'],
+    });
 
     if (!user)
       throw new NotFoundException(`User with id ${id} not found in database`);
@@ -40,31 +32,33 @@ export class UsersService {
     return user;
   }
 
-  create(payload: CreateUserDto) {
-    const id = ++this.counterId;
-    const newUser = { id, ...payload };
-    this.users.push(newUser);
+  async create(payload: CreateUserDto) {
+    const newUser = this.userReposity.create(payload);
 
-    return newUser;
+    if (payload.customerId) {
+      const customer = await this.customersService.findById(payload.customerId);
+      newUser.customer = customer;
+    }
+
+    return await this.userReposity.save(newUser);
   }
 
-  update(id: number, payload: UpdateUserDto) {
-    const user = this.findById(id);
-    const index = this.users.findIndex((user) => user.id === id);
-    this.users[index] = { ...user, ...payload };
+  async update(id: number, payload: UpdateUserDto) {
+    const user = await this.findById(id);
+    this.userReposity.merge(user, payload);
 
-    return this.users[index];
+    return await this.userReposity.save(user);
   }
 
-  delete(id: number) {
-    const user = this.findById(id);
-    this.users = this.users.filter((user) => user.id !== id);
+  async remove(id: number) {
+    const user = await this.findById(id);
+    await this.userReposity.delete(id);
 
     return user;
   }
 
   async findOrderByUser(id: number) {
-    const user = this.findById(id);
+    const user = await this.findById(id);
 
     return {
       date: new Date(),

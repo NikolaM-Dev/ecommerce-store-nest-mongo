@@ -15,43 +15,43 @@ import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
 import { UsersService } from '../services/users.service';
 
-@ApiTags('users')
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  getAll() {
-    return this.usersService.findAll();
+  async findMany() {
+    return await this.usersService.findMany();
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.findById(id);
+  async findById(@Param('id', ParseIntPipe) id: number) {
+    return await this.usersService.findById(id);
   }
 
   @Get(':id/orders')
   @HttpCode(HttpStatus.ACCEPTED)
-  findOrder(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.findOrderByUser(id);
+  async findOrder(@Param('id', ParseIntPipe) id: number) {
+    return await this.usersService.findOrderByUser(id);
   }
 
   @Post()
-  create(@Body() payload: CreateUserDto) {
-    return this.usersService.create(payload);
+  async create(@Body() payload: CreateUserDto) {
+    return await this.usersService.create(payload);
   }
 
   @Put(':id')
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdateUserDto,
   ) {
-    return this.usersService.update(id, payload);
+    return await this.usersService.update(id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.delete(id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return await this.usersService.remove(id);
   }
 }
