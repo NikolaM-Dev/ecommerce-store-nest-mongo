@@ -7,6 +7,7 @@ import {
   Put,
   HttpStatus,
   HttpCode,
+  Delete,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -14,29 +15,37 @@ import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customers.dto';
 import { CustomersService } from '../services/customers.service';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
 
-@ApiTags('customers')
+@ApiTags('Customers')
 @Controller('customers')
 export class CustomersController {
   constructor(private customersService: CustomersService) {}
 
   @Get()
-  getAll() {
-    return this.customersService.findAll();
+  async findMany() {
+    return await this.customersService.findMany();
   }
 
-  @Get('id')
+  @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('id', ParseIntPipe) id: number) {
-    return this.customersService.findById(id);
+  async getOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.customersService.findById(id);
   }
 
   @Post()
-  create(@Body() payload: CreateCustomerDto) {
-    return this.customersService.create(payload);
+  async create(@Body() payload: CreateCustomerDto) {
+    return await this.customersService.create(payload);
   }
 
-  @Put('id')
-  update(@Param('id', ParseIntPipe) id: number, payload: UpdateCustomerDto) {
-    return this.customersService.update(id, payload);
+  @Put(':id')
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() payload: UpdateCustomerDto,
+  ) {
+    return await this.customersService.update(id, payload);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return await this.customersService.remove(id);
   }
 }
