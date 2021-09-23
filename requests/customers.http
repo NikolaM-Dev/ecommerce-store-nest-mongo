@@ -1,0 +1,34 @@
+# @name findMany
+GET {{HOST}}/customers
+
+###
+
+# @name findById
+GET {{HOST}}/customers/1
+
+###
+
+# @name create
+POST {{HOST}}/customers
+Content-Type: application/json
+
+{
+  "name": "camilo",
+  "lastName": "dev",
+  "phone": "+57 311 5086634"
+}
+
+###
+
+# @name update
+PUT {{HOST}}/customers/1
+Content-Type: application/json
+
+{
+  "phone": "+57 311 508 6633"
+}
+
+###
+
+# @name remove
+DELETE {{HOST}}/customers/1

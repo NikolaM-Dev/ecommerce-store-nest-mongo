@@ -1,0 +1,49 @@
+# @name findMany
+GET {{HOST}}/users
+
+###
+
+# @name findById
+GET {{HOST}}/users/2
+
+###
+
+# @name create
+POST {{HOST}}/users
+Content-Type: application/json
+
+{
+  "email": "bob@gmail.com",
+  "password": "bobbob",
+  "role": "ADMIN"
+}
+
+###
+
+# @name createWithCostumer
+POST {{HOST}}/users
+Content-Type: application/json
+
+{
+  "email": "bobCustomer@gmail.com",
+  "password": "bobbob",
+  "role": "CUSTOMER",
+  "customerId": 2
+}
+
+###
+
+# @name update
+PUT {{HOST}}/users/1
+Content-Type: application/json
+
+{
+  "email": "bob@gmail.com"
+}
+
+###
+
+# @name remove
+
+DELETE {{HOST}}/users/1
+Content-Type: application/json

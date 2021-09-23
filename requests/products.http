@@ -4,7 +4,7 @@ GET {{HOST}}/products
 ###
 
 # @name findById
-GET {{HOST}}/products/2
+GET {{HOST}}/products/1
 
 ###
 
@@ -27,7 +27,7 @@ PUT {{HOST}}/products/1
 Content-Type: application/json
 
 {
-  "stock": 23
+  "stock": 88
 }
 
 ###
