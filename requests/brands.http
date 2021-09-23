@@ -1,0 +1,35 @@
+# @name findMany
+GET {{HOST}}/brands
+
+###
+
+# @name findById
+GET {{HOST}}/brands/1
+
+###
+
+# @name create
+POST {{HOST}}/brands
+Content-Type: application/json
+
+{
+  "name": "Alqueria",
+  "image": "https://ecommerce.com/alqueria.png"
+}
+
+###
+
+# @name update
+PUT {{HOST}}/brands/1
+Content-Type: application/json
+
+{
+  "name": "Nestle"
+}
+
+###
+
+# @name remove
+
+DELETE {{HOST}}/brands/1
+Content-Type: application/json

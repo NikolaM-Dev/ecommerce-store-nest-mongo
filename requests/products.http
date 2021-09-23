@@ -13,11 +13,12 @@ POST {{HOST}}/products
 Content-Type: application/json
 
 {
-  "name": "Coca-Cola",
-  "description": "Gaseosa azucarada",
-  "price": 801,
-  "stock": 80,
-  "image": "https://ecommerce.com/coca-cola.png"
+  "name": "Nusita",
+  "description": "pudin de chocolate y vainilla",
+  "price": 600,
+  "stock": 40,
+  "image": "https://ecommerce.com/nusita.png",
+  "brandId": 1
 }
 
 ###
