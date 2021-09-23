@@ -1,0 +1,32 @@
+# @name findMany
+GET {{HOST}}/categories
+
+###
+
+# @name findById
+GET {{HOST}}/categories/1
+
+###
+
+# @name create
+POST {{HOST}}/categories
+Content-Type: application/json
+
+{
+  "name": "Comida",
+}
+
+###
+
+# @name update
+PUT {{HOST}}/categories/1
+Content-Type: application/json
+
+{
+  "name": "Bebidas"
+}
+
+###
+
+# @name remove
+DELETE {{HOST}}/categories/1
