@@ -2,16 +2,20 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { BrandsService } from './brands.service';
+import { Brand } from '../entities/brand.entity';
+import { Category } from '../entities/category.entity';
 import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
 import { Product } from '../entities/product.entity';
 
 @Injectable()
 export class ProductsService {
   constructor(
-    private readonly brandsService: BrandsService,
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
+    @InjectRepository(Category)
+    private readonly categoryRepository: Repository<Category>,
+    @InjectRepository(Brand)
+    private readonly brandRepository: Repository<Brand>,
   ) {}
 
   async findMany() {
@@ -21,7 +25,9 @@ export class ProductsService {
   }
 
   async findById(id: number) {
-    const product = await this.productRepository.findOne(id);
+    const product = await this.productRepository.findOne(id, {
+      relations: ['brand', 'categories'],
+    });
 
     if (!product)
       throw new NotFoundException(
@@ -35,8 +41,15 @@ export class ProductsService {
     const newProduct = this.productRepository.create(payload);
 
     if (payload.brandId) {
-      const brand = await this.brandsService.findById(payload.brandId);
+      const brand = await this.brandRepository.findOne(payload.brandId);
       newProduct.brand = brand;
+    }
+
+    if (payload.categoriesIds) {
+      const categories = await this.categoryRepository.findByIds(
+        payload.categoriesIds,
+      );
+      newProduct.categories = categories;
     }
 
     return await this.productRepository.save(newProduct);
@@ -46,10 +59,39 @@ export class ProductsService {
     const product = await this.findById(id);
 
     if (payload.brandId) {
-      const brand = await this.brandsService.findById(payload.brandId);
+      const brand = await this.brandRepository.findOne(payload.brandId);
       product.brand = brand;
     }
+
+    if (payload.categoriesIds) {
+      const categories = await this.categoryRepository.findByIds(
+        payload.categoriesIds,
+      );
+      product.categories = categories;
+    }
+
     this.productRepository.merge(product, payload);
+
+    return await this.productRepository.save(product);
+  }
+
+  async removeCategoryByProduct(productId: number, categoryId: number) {
+    const product = await this.findById(productId);
+    product.categories = product.categories.filter(
+      (category) => category.id !== categoryId,
+    );
+
+    return await this.productRepository.save(product);
+  }
+
+  async addCategoryByProduct(productId: number, categoryId: number) {
+    const product = await this.findById(productId);
+    const category = await this.categoryRepository.findOne(categoryId, {});
+
+    if (!category)
+      throw new NotFoundException(`Category with id ${categoryId} not found`);
+
+    product.categories.push(category);
 
     return await this.productRepository.save(product);
   }
