@@ -4,7 +4,7 @@ GET {{HOST}}/products
 ###
 
 # @name findById
-GET {{HOST}}/products/1
+GET {{HOST}}/products/3
 
 ###
 
@@ -13,25 +13,36 @@ POST {{HOST}}/products
 Content-Type: application/json
 
 {
-  "name": "Nusita",
-  "description": "pudin de chocolate y vainilla",
-  "price": 600,
-  "stock": 40,
-  "image": "https://ecommerce.com/nusita.png",
-  "brandId": 1
+  "name": "Sabiloe4",
+  "description": "Bebida con trositos de sabila",
+  "price": 2100,
+  "stock": 80,
+  "image": "https://ecommerce.com/sabiloe.png",
+  "brandId": 2,
+  "categoriesIds": [11]
 }
 
 ###
 
 # @name update
-PUT {{HOST}}/products/1
+PUT {{HOST}}/products/3
 Content-Type: application/json
 
 {
-  "stock": 88
+  "categoriesIds": [1, 2]
 }
+
+###
+
+# @name addCategory
+PUT {{HOST}}/products/3/category/3
 
 ###
 
 # @name remove
 DELETE {{HOST}}/products/1
+
+###
+
+# @name removeCategory
+DELETE {{HOST}}/products/3/category/3
