@@ -18,7 +18,7 @@ import { ParseIntPipe } from 'src/common/parse-int.pipe';
 @ApiTags('Categories')
 @Controller('categories')
 export class CategoriesController {
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
   @ApiOperation({ summary: 'List of categories' })
