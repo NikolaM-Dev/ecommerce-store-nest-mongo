@@ -35,6 +35,7 @@ export class BrandsService {
 
   async update(id: number, payload: UpdateBrandDto) {
     const brand = await this.findById(id);
+
     this.brandRepository.merge(brand, payload);
 
     return await this.brandRepository.save(brand);
@@ -42,6 +43,7 @@ export class BrandsService {
 
   async remove(id: number) {
     const brand = await this.findById(id);
+
     await this.brandRepository.delete(id);
 
     return brand;
