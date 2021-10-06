@@ -1,3 +1,4 @@
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -8,12 +9,11 @@ import {
   Put,
   HttpStatus,
   HttpCode,
+  ParseIntPipe,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { CategoriesService } from '../services/categories.service';
 import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
-import { ParseIntPipe } from 'src/common/parse-int.pipe';
 
 @ApiTags('Categories')
 @Controller('categories')
