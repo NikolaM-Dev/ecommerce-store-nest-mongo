@@ -45,6 +45,7 @@ import config from './config';
           'https://jsonplaceholder.typicode.com/todos',
         );
         const { data } = await lastValueFrom(tasks);
+
         return data;
       },
       inject: [HttpService],
