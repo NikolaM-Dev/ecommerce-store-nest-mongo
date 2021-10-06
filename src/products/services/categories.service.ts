@@ -35,6 +35,7 @@ export class CategoriesService {
 
   async update(id: number, payload: UpdateCategoryDto) {
     const category = await this.findById(id);
+
     this.categoryRepository.merge(category, payload);
 
     return await this.categoryRepository.save(category);
@@ -42,6 +43,7 @@ export class CategoriesService {
 
   async remove(id: number) {
     const category = await this.findById(id);
+
     await this.categoryRepository.delete(id);
 
     return category;
