@@ -3,7 +3,7 @@ import { ConfigType } from '@nestjs/config';
 import { Module, Global } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import config from 'src/config';
+import config from '../config';
 
 const API_KEY = '12345634';
 const API_KEY_PROD = 'production1234';
@@ -61,6 +61,7 @@ const API_KEY_PROD = 'production1234';
           password,
           port,
         });
+
         client.connect();
 
         return client;
