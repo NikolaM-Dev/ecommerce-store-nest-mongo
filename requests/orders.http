@@ -1,0 +1,32 @@
+# @name findMany
+GET {{HOST}}/orders
+
+###
+
+# @name findById
+GET {{HOST}}/orders/1
+
+###
+
+# @name create
+POST {{HOST}}/orders
+Content-Type: application/json
+
+{
+  "customerId": 2
+}
+
+###
+
+# @name update
+PUT {{HOST}}/orders/1
+Content-Type: application/json
+
+{
+  "customerId": 1
+}
+
+###
+
+# @name remove
+DELETE {{HOST}}/orders/1
