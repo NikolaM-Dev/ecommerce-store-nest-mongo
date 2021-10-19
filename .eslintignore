@@ -1,0 +1,11 @@
+# Dirs
+.vscode/
+dist/
+mongo_data/
+mysql_data/
+node_modules/
+postgres_data/
+requests/
+
+# Files
+.eslintrc.js
