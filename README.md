@@ -1,28 +1,21 @@
-# REST API with NestJS + Moongose + Auth + Swagger
+# 🌿 Ecommerce Store Nest y MongoDB
 
-## Why?
+Rest Api NestJS + MongoDB with authentication with jwt and passport. Validation of actions by roles. With self-generated documentation with Swagger.
 
-- REST APIs are the staple of the web development industry
-- Knowing how REST APIs is important for both back and frontend developers
-- There's no better way to understand how they work than to build one
+## Content
 
-## Concepts
+This project has one branch: main, contains the final product. And several temporary child branches where features are resolved or bugs are fixed.
+Carrying out the git workflow strategy [github flow](https://guides.github.com/introduction/flow/)
 
-- REST API
-- JWT and Passport Auth
-- Data persistence in MongoDB
-- Documentation with OpenAPI
+## Demo
 
-## Technologies
+If you want to see the demo of this proyect deployed, you can visit [Demo of the proyect](https://ecommerce-store-nest-mongo.herokuapp.com/api)
 
-- Node.js
-- MongoDB with Mongoose
-- Typescript
-- NestJS
+> This is for the sole purpose of having the deployment
 
 ## Installation
 
-```bash
+```sh
 # yarn
 yarn
 
@@ -30,25 +23,32 @@ yarn
 npm install
 ```
 
-## Running the app
+### Running the App
 
-```bash
+```sh
 # development
-$ npm run start
+yarn start
 
 # watch mode
-$ npm run start:dev
+yarn start:dev
 
 # production mode
-$ npm run start:prod
+yarn start:prod
 ```
 
-## Test endpoints
+### How to start the database container 🐘
 
-In the request folder, you will find a list of endpoints ready to test in VS Code with the extension [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+```sh
+# up in background
+docker-compose up -d mongo
+```
 
-### Endpoints Documentation
+> Don't forget to fill in the field of `example.env`
 
-- `http://localhost:3000/api/docs`
+## Data Flow
 
-![endpoints swagger](./assets/images/api_docs.png)
+![data_flow](./diagrams/data_flow.png)
+
+## Access Token and Role Flow
+
+![auth_role_flow](./diagrams/auth_role_flow.png)
