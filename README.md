@@ -1,4 +1,4 @@
-# 🌿 Ecommerce Store Nest y MongoDB
+# 🌿 Ecommerce Store Nest and MongoDB
 
 Rest Api NestJS + MongoDB with authentication with jwt and passport. Validation of actions by roles. With self-generated documentation with Swagger.
 
